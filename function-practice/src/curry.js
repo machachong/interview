@@ -1,7 +1,7 @@
 /*
  * @Author: zhiliang.zheng
  * @Date: 2023-10-15 10:03:24
- * @LastEditTime: 2023-10-21 11:28:05
+ * @LastEditTime: 2023-10-21 13:40:39
  * @LastEditors: zhiliang.zheng
  * @Description: 
  */
@@ -12,7 +12,12 @@ function add(a,b,c){
   return a+b+c
 }
 function curry(fn, ...args) {
-	return args.length < fn.length ? (...sec) => curry(fn, ...args, ...sec) : fn(...args)
+  console.log(fn.length, ...args);
+  return args.length < fn.length 
+    ? 
+    (...sec)=>curry(fn,...args,...sec)
+    :
+    fn(...args)
 }
 let curryFun = curry(add)
-curryFun(1)(2)(3)
+console.log(curryFun(1)(2)(3))

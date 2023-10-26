@@ -1,7 +1,7 @@
 /*
  * @Author: zhiliang.zheng
  * @Date: 2023-10-24 22:56:47
- * @LastEditTime: 2023-10-24 23:12:25
+ * @LastEditTime: 2023-10-26 09:17:37
  * @LastEditors: zhiliang.zheng
  * @Description: 
  */
@@ -15,7 +15,7 @@ var lengthOfLongestSubstring = function (s) {
 	let res = []
 	let max = 0
 	for (let i = 0; i < s.length; i++) {
-		if (s.includes(s[i])) {
+		if (res.includes(s[i])) {
 			res.splice(0, res.indexOf(s[i]) + 1)
 		}
 		res.push(s[i])

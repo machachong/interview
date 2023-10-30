@@ -1,7 +1,7 @@
 /*
  * @Author: zhiliang.zheng
  * @Date: 2023-10-24 16:32:16
- * @LastEditTime: 2023-10-24 17:41:44
+ * @LastEditTime: 2023-10-30 18:31:23
  * @LastEditors: zhiliang.zheng
  * @Description: 双指针
  */
@@ -56,3 +56,24 @@ const reverse = (chars, left, right) => {
 }
 const str = ["a", "a", "b", "b", "c", "c", "c"]
 console.log(compress(str))
+
+
+
+// "aabcccccaaa"
+//  输出："a2b1c5a3"
+var compressString = function(S) {
+    let len = S.length
+    if (len < 2) return S
+    let str = '', char = S[0], count = 1
+    for(let i = 1; i < len; i++) {
+        if (char === S[i]) {
+            count++
+        } else {
+            str += char + count
+            char = S[i]
+            count = 1
+        }
+    }
+    str += char + count
+    return str.length < S.length ? str : S
+};

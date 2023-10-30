@@ -1,7 +1,7 @@
 /*
  * @Author: zhiliang.zheng
  * @Date: 2023-10-24 22:56:47
- * @LastEditTime: 2023-10-26 09:17:37
+ * @LastEditTime: 2023-10-30 17:01:27
  * @LastEditors: zhiliang.zheng
  * @Description: 
  */
@@ -24,4 +24,4 @@ var lengthOfLongestSubstring = function (s) {
 	return max
 }
 const s = 'abcabcbb'
-console.log(getLength(s))
+console.log(lengthOfLongestSubstring(s))

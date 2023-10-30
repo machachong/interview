@@ -1,7 +1,7 @@
 /*
  * @Author: zhiliang.zheng
  * @Date: 2023-10-18 11:22:00
- * @LastEditTime: 2023-10-21 16:17:05
+ * @LastEditTime: 2023-10-30 17:31:29
  * @LastEditors: zhiliang.zheng
  * @Description: 
  */
@@ -34,10 +34,8 @@ function getArr(nums){
       } else {
         findItem(used, item)
       }
-      console.log(111,used, item);
       used[i] = false
       item.pop()
-      console.log(222,used, item)
     }
   }
   return res

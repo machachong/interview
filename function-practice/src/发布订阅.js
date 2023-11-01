@@ -1,7 +1,7 @@
 /*
  * @Author: zhiliang.zheng
  * @Date: 2023-10-26 10:55:39
- * @LastEditTime: 2023-10-30 16:57:56
+ * @LastEditTime: 2023-11-01 10:16:03
  * @LastEditors: zhiliang.zheng
  * @Description: 
  */
@@ -25,6 +25,17 @@ class Event {
 			fn(...res)
 		})
 	}
+  off(){
+     
+  }
+    once(key, callBack){
+        // 订阅一次事件，这里注意 on 和 off要同一个引用，后续才可以将此次订阅off掉
+        function fun(){
+            callBack();
+            this.off(key, fun)
+        }
+        this.on(key, fun)
+      }
 }
 // 使用
 function test(data1, data2) {

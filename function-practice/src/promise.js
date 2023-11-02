@@ -43,6 +43,7 @@ const a = new Promise((resolve, reject) => {
 Promise.resolve(a).then((res)=>{
   console.log(res);
 })
+// then链式调用参数，第一个then为 promise返回的，剩下的resovle值为上一个then的返回值
 Promise.resolve(9)
 	.then((res) => {
     console.log(res)
@@ -50,12 +51,12 @@ Promise.resolve(9)
     return 10
 	})
 	.then((res) => {
-    console.log(res)
-		console.log(6)
-	})
+    console.log("我是有return的res:" + res)
+	},(rej) => {
+    console.log('我是rej:'+ rej);
+  })
 	.then((res) => {
-    console.log(res)
-		console.log(7)
+    console.log('我是没有return的res'+res)
 	})
 
 // 3 ：若resolve方法的参数回调函数的返回值为Promise对象，则会影响then方法返回值Promise对象的pending状态延迟2个微任务后改变。
@@ -75,3 +76,85 @@ Promise.resolve(9)
 // 	.then((res) => {
 // 		console.log(7)
 // 	})
+// 手动实现allSettled
+Promise.myAllSettled = (proms) => {
+	return new Promise((resolve, reject) => {
+		let resolvedCount = 0
+		let count = 0
+		const results = []
+		for (const prom of proms) {
+			let i = count
+			count++
+			Promise.resolve(prom)
+				.then(
+					(data) => {
+						resolvedCount++
+						results[i] = {
+							status: "fullfilled",
+							value: data,
+						}
+					},
+					(reason) => {
+						resolvedCount++
+						results[i] = {
+							status: "rejected",
+							reason,
+						}
+					}
+				)
+				.finally(() => {
+					if (resolvedCount >= count) {
+						resolve(results)
+					}
+				})
+		}
+	})
+}
+// 手动实现Promise.race
+Promise.myRace = function (pros) {
+	return new Promise((resolve, reject) => {
+		for (let pro of pros) {
+			Promise.resolve(pro).then(
+			  data => resolve(data),
+				error => reject(error)
+			)
+		}
+	})
+}
+// 手动实现Promise.all
+Promise.myAll = function(pros){
+  return new Promise((resolve, reject) => {
+		let resArr = []
+		for (let pro of pros) {
+			Promise.resolve(pro).then(
+				(data) => {
+					resArr.push(data)
+					if (resArr.length === pros.length) return resolve(resArr)
+				},
+				(error) => {
+					return reject(error)
+				}
+			)
+		}
+  })
+}
+const pro1 = new Promise((res,rej) => {
+  setTimeout(() => {
+    res('1')
+  },1000)
+})
+const pro2 = new Promise((res,rej) => {
+  setTimeout(() => {
+    rej("2")
+  },2000)
+})
+const pro3 = new Promise((res,rej) => {
+  setTimeout(() => {
+    res('3')
+  },3000)
+})
+Promise.myAll([pro1, pro2, pro3]).then((res) => {
+	console.log(res)
+},(error) => {
+  console.log(error);
+})

@@ -1,0 +1,47 @@
+<!--
+ * @Author: zhiliang.zheng
+ * @Date: 2023-10-23 16:32:58
+ * @LastEditTime: 2023-10-24 21:10:12
+ * @LastEditors: zhiliang.zheng
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div{
+      width: 100%;
+      height: auto;
+      display: flex;
+      gap: 10px;
+      flex: wrap;
+    }
+    p{
+      flex: 1;
+      background: blue;
+    }
+    p:first-child{
+      flex-grow: 2;
+    }
+    /* flex:1 */
+    /* flex-grow 如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。 */
+    /* flex-shrink flex-shrink属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小 */
+    /* flex-basis 属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。 */
+  </style>
+</head>
+<body>
+  <div>
+    <p>999999999</p>
+    <p>999999999</p>
+    <p>999999999</p>
+  </div>
+  <div>
+    <p>999999999</p>
+    <p>999999999</p>
+    <p>999999999</p>
+  </div>
+</body>
+</html>
